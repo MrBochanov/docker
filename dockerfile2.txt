@@ -1,0 +1,25 @@
+#Dockerfile
+
+FROM ubuntu:16.04
+
+LABEL mainteiner="evgeniy.bochanov"
+
+RUN apt-get update && apt-get install -y nano && apt-get -y install sudo
+
+ENV EDITOR="/bin/nano"
+
+RUN sudo mkdir -m 777 home/stepik
+
+VOLUME ["/home/stepik"] 
+
+WORKDIR /home/stepik
+
+ARG UID=1000
+
+RUN sudo useradd -u $UID user -p 12345 
+#RUN sudo passwd user 123456
+RUN sudo touch 123.txt && chown $UID:$UID /home/stepik/123.txt
+
+USER $UID 
+
+ENTRYPOINT ["/bin/nano", "/home/stepik/123.txt"]

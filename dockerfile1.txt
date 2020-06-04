@@ -1,0 +1,11 @@
+# Dockerfile
+
+FROM ubuntu:14.04
+
+LABEL mainteiner="evgeniy.bochanov"
+
+ENTRYPOINT ["/usr/bin/printf", "Hello %s!\n"]
+CMD ["World"]
+
+
+RUN exit
